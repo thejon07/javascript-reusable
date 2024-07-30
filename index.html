@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            margin-left: 550px;
+            color: rgb(18, 100, 171);
+        }
+        .btn {
+            position: relative;
+            margin-left: 250px;
+        }
+        .slide-container {
+            display: flex;
+            width: 800px;
+            border: 2px solid rgb(150, 144, 144);
+            height: 400px;
+            overflow: hidden;
+            margin: auto;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 {
+                margin-left: 37px;
+            }
+            .slide-container{
+            width: 300px;
+            }
+            .btn{
+                margin-left: 38px;
+            }
+        }
+
+
+        .slide {
+            flex-shrink: 0;
+            width: 800px;
+            height: 400px;
+        }
+
+        .slide1 {
+            background-color: rgb(42, 146, 167);
+        }
+
+        .slide2 {
+            background-color: rgb(61, 27, 27);
+        }
+
+        .slide3 {
+            background-color: rgb(31, 96, 71);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: gray;
+            margin: 5px;
+        }
+
+        .dot-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .active {
+            background-color: rgb(18, 100, 171);
+        }
+
+       
+
+        .btn button {
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Carousel</h1>
+    <div class="btn">
+        <button onclick="handlePreviousSlide()">Prev</button>
+        <button onclick="handleNextSlide()">Next</button>
+    </div>
+    <div class="slide-container">
+        <div class="slide slide1"></div>
+        <div class="slide slide2"></div>
+        <div class="slide slide3"></div>
+    </div>
+    <div class="dot-container">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <script>
+        let slides = document.getElementsByClassName('slide');
+        let dots = document.getElementsByClassName("dot");
+        let currentIndex = 0;
+
+        const showCurrentSlide = (n) => {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+            slides[n].style.display = "block";
+            dots[n].classList.add("active");
+        }
+
+        const handleNextSlide = () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showCurrentSlide(currentIndex);
+        }
+
+        const handlePreviousSlide = () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            showCurrentSlide(currentIndex);
+        }
+
+        showCurrentSlide(currentIndex);
+    </script>
+</body>
+
+</html>
