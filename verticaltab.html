@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active{
+            background-color: red;
+        }
+        .container{
+            display: flex;
+            text-align: center;
+            margin: auto;
+            margin-left: 300px;
+        }
+        .all-contents{
+            width: 500px;
+            height: 500px;
+            border: 2px solid black;
+            margin-left:30px;
+        }
+        .alllist{
+            width: 200px;
+            height: 100px;
+        }
+        h1{
+            text-align: center;
+        }
+        @media screen and (max-width:400px) {
+            h1{
+                margin: 0;
+                font-size: 20px;
+            }
+            .container{
+                margin-left: 0px;
+                margin-top: 40px;
+            }
+            .all-contents{
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>VERTICAL TAB</h1>
+        <div class="container">
+            <div class="alllist">
+                <ul>
+                    <li class="country" id="defaultclick" onclick="handleactiveclick(event,'usa')">CALIFORNIA</li>
+                    <li class="country" onclick="handleactiveclick(event,'uk')">LONDON</li>
+                    <li class="country" onclick="handleactiveclick(event,'germany')">BERLIN</li>
+                </ul>
+            </div>
+            <div class="all-contents">
+                <h1>contents based on country name</h1>
+                <div id="usa" class="content">
+                    <h1>USA</h1>
+                </div>
+                <div id="uk" class="content">
+                    <h1>UK</h1>
+                </div>
+                <div id="germany" class="content">
+                    <h1>GERMANY</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let country = document.getElementsByClassName("country");
+        let content = document.getElementsByClassName("content");
+        console.log(country,content)
+        const handleactiveclick = (e,identity)=>{
+            let i;
+            for(i=0;i<country.length; i++){
+               country[i].classList.remove("active");
+            }
+            for(i=0;i<content.length; i++){
+                content[i].style.display = "none";
+            }
+            e.currentTarget.classList.add("active")
+            document.getElementById(identity).style.display = "block";
+            console.log(e.currentTarget)
+        }
+        document.getElementById('defaultclick').click();
+    </script>
+</body>
+</html>
